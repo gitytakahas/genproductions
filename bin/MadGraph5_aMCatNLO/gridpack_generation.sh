@@ -120,6 +120,10 @@ VVSOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/$VVMO
 ZPRIMEMODEL=topBSM_UFO.zip
 ZPRIMESOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/${ZPRIMEMODEL}
 
+# Model for searches for monotops
+MONOTOPMODEL=monotops_UFO.tgz
+MONOTOPSOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/${MONOTOPMODEL}
+
 ## DM Model Vector Mediator
 SimplifiedVDM=SimplifiedDM_VectorMediator_UFO.tar.gz
 SimplifiedVDMSOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/${SimplifiedVDM}
@@ -143,6 +147,11 @@ TGAMMASOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/$
 #ttDM EFT model, needed for ttDM production
 EFFDM=EffDM_222_restricted.tar
 EFFDMSOURCE=/afs/cern.ch/cms/generators/www/
+
+# 2HDM model, needed for the charged Higgs analysis
+CHMODEL=2HDMtypeII.tar.gz
+CHSOURCE=/afs/cern.ch/cms/generators/www/
+
 
 MGBASEDIRORIG=MG5_aMC_v2_2_2
 
@@ -269,8 +278,11 @@ if [ ! -d ${AFS_GEN_FOLDER}/${name}_gridpack ]; then
 
   #get Diboson model
   wget --no-check-certificate ${VVSOURCE}
+  #get Monotop model
+  wget --no-check-certificate ${MONOTOPSOURCE}
   cd models
   tar xvzf ../${VVMODEL}
+  tar xvzf ../${MONOTOPMODEL}
   cd ..
 
   #get Z' model
@@ -301,6 +313,12 @@ if [ ! -d ${AFS_GEN_FOLDER}/${name}_gridpack ]; then
   cp ${EFFDMSOURCE}/${EFFDM} .
   cd models
   tar xvf ../${EFFDM}
+  cd ..
+
+  # get ttDM model
+  cp ${CHSOURCE}/${CHMODEL} .
+  cd models
+  tar xvf ../${CHMODEL}
   cd ..
 
   
